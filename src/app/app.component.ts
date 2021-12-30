@@ -45,10 +45,16 @@ export class AppComponent {
     const title = this.form.controls['title'].value;
     const id = this.todos.length + 1;
     this.todos.push(new Todo(id, title, false));
+    this.save();
     this.clear();
   }
 
   clear(){
     this.form.reset();
+  }
+
+  save(){
+    const data = JSON.stringify(this.todos);
+    localStorage.setItem('todos', data)
   }
 }
