@@ -1,7 +1,17 @@
-<h1>{{title}}</h1>
+<div class="container">
+  <h1>{{ title }}</h1>
 
-<button (click)="alterarTitulo()">Mudar titulo</button>
+  <div class="box">
+    <ul>
+      <li *ngFor="let todo of todos" class="card">
+        <p class="tarefa">{{ todo.id }}. {{ todo.title }}</p>
 
-<ul>
-  <li *ngFor="let todo of todos"> {{todo.id}} - {{todo.title}} -  <button>CONCLUIR</button> - <button>REMOVER</button></li>
-</ul>
+        <div class="options">
+          <button *ngIf="!todo.done" mat-button class="buttonConcluir">CONCLUIR</button>
+          <p *ngIf="todo.done" class="done">DONE</p>
+          <button mat-button class="buttonRemover">REMOVER</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

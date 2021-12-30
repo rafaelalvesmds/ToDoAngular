@@ -18,7 +18,4 @@ export class AppComponent {
     this.todos.push(new Todo(3, '1995', true));
   }
 
-  alterarTitulo() {
-    this.title = "Mudei"
-  }
 }
