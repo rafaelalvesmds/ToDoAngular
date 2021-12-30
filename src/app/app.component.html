@@ -1,51 +1,60 @@
-<div class="container">
-  <h1>{{ title }}</h1>
+<h1 class="title animated jackInTheBox">TODO LIST</h1>
+<ul class="animated flipInX" *ngIf="mode == 'list'">
+  <p class="text-center" *ngIf="todos.length == 0">
+    <small>Não existe nenhuma tarefa adicionada !</small>
+  </p>
+  <li *ngFor="let todo of todos">
+    {{ todo.title }}
+    <button (click)="remove(todo)"><i class="far fa-trash-alt"></i></button>
+    <button *ngIf="!todo.done" (click)="markAsDone(todo)">
+      <i class="far fa-check-circle"></i>
+    </button>
+    <button *ngIf="todo.done" (click)="markAsUndone(todo)">
+      <i class="fas fa-check-circle"></i>
+    </button>
+  </li>
+</ul>
 
+<div id="modal" *ngIf="mode == 'add'" class="animated flipInX">
+  <h1 class="text-center">Adicionar Tarefa</h1>
   <form [formGroup]="form">
-    <fieldset>
-      <label for="">Tarefa</label>
-      <input
-        type="text"
-        placeholder="Insira sua tarefa"
-        maxlength="60"
-        formControlName="title"
-      />
-      <small
-        *ngIf="
-          form.controls['title'].invalid && !form.controls['title'].pristine
-        "
-        >Este campo deve conter de 3 a 50 caracteres</small
-      >
-      <button [disabled]="form.invalid" (click)="add()">Salvar</button>
-    </fieldset>
+    <input
+      type="text"
+      placeholder="Título da Tarefa"
+      maxlength="60"
+      formControlName="title"
+    /><br />
+    <small
+      class="danger"
+      *ngIf="form.controls['title'].invalid && !form.controls['title'].pristine"
+    >
+      Este campo deve conter entre 3 e 50 caracteres<br />
+    </small>
+    <p class="text-center">
+      <button [disabled]="form.invalid" (click)="add()" class="button">
+        <i class="far fa-save"></i> Salvar
+      </button>
+    </p>
   </form>
-
-  <div class="box">
-    <ul>
-      <p *ngIf="todos.length===0"><small>Não há tarefas pendentes!</small></p>
-      <li *ngFor="let todo of todos" class="card">
-        <p class="tarefa">{{ todo.id }}. {{ todo.title }}</p>
-
-        <div class="options">
-          <button
-            *ngIf="!todo.done"
-            mat-button
-            class="buttonConcluir"
-            (click)="markAsDone(todo)"
-          >
-            CONCLUIR
-          </button>
-          <p *ngIf="todo.done" class="done" (click)="markAsUndone(todo)">
-            DONE
-          </p>
-          <button mat-button class="buttonRemover" (click)="remove(todo)">
-            REMOVER
-          </button>
-        </div>
-      </li>
-    </ul>
-  </div>
+  <br /><br />
 </div>
+
+<button
+  class="add-button animated fadeInUp button"
+  (click)="changeMode('add')"
+  *ngIf="mode == 'list'"
+>
+  <i class="fas fa-plus-circle"></i>
+  NOVA TAREFA
+</button>
+<button
+  class="add-button animated fadeInUp button"
+  (click)="changeMode('list')"
+  *ngIf="mode == 'add'"
+>
+  <i class="fas fa-times"></i>
+  CANCELAR
+</button>
 
 <!--
   () = HTML > TS
