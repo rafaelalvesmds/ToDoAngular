@@ -11,7 +11,6 @@ import { Todo } from 'src/models/todo.model';
 export class AppComponent {
   public todos: Todo[] = [];
   public title: String = 'Minhas Tarefas';
-
   public form!: FormGroup;
 
 
