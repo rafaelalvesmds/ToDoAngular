@@ -1,21 +1,39 @@
 <div class="container">
   <h1>{{ title }}</h1>
 
+  <form [formGroup]="form">
+    <fieldset>
+      <label for="">Tarefa</label>
+      <input type="text" placeholder="Insira sua tarefa" maxlength="60" formControlName="title"/>
+      <button>Salvar</button>
+    </fieldset>
+  </form>
+
   <div class="box">
     <ul>
       <li *ngFor="let todo of todos" class="card">
         <p class="tarefa">{{ todo.id }}. {{ todo.title }}</p>
 
         <div class="options">
-          <button *ngIf="!todo.done" mat-button class="buttonConcluir" (click)="markAsDone(todo)">CONCLUIR</button>
-          <p *ngIf="todo.done" class="done" (click)="markAsUndone(todo)">DONE</p>
-          <button mat-button class="buttonRemover" (click)="remove(todo)">REMOVER</button>
+          <button
+            *ngIf="!todo.done"
+            mat-button
+            class="buttonConcluir"
+            (click)="markAsDone(todo)"
+          >
+            CONCLUIR
+          </button>
+          <p *ngIf="todo.done" class="done" (click)="markAsUndone(todo)">
+            DONE
+          </p>
+          <button mat-button class="buttonRemover" (click)="remove(todo)">
+            REMOVER
+          </button>
         </div>
       </li>
     </ul>
   </div>
 </div>
-
 
 <!--
   () = HTML > TS
