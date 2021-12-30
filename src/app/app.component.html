@@ -7,8 +7,8 @@
         <p class="tarefa">{{ todo.id }}. {{ todo.title }}</p>
 
         <div class="options">
-          <button *ngIf="!todo.done" mat-button class="buttonConcluir">CONCLUIR</button>
-          <p *ngIf="todo.done" class="done">DONE</p>
+          <button *ngIf="!todo.done" mat-button class="buttonConcluir" (click)="markAsDone(todo)">CONCLUIR</button>
+          <p *ngIf="todo.done" class="done" (click)="markAsUndone(todo)">DONE</p>
           <button mat-button class="buttonRemover" (click)="remove(todo)">REMOVER</button>
         </div>
       </li>
