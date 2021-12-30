@@ -23,10 +23,6 @@ export class AppComponent {
       ])]
     });
 
-
-    this.todos.push(new Todo(1,'study', false));
-    this.todos.push(new Todo(2,'ir ali', false));
-    this.todos.push(new Todo(3, '1995', true));
   }
 
   remove(todo: Todo) {
@@ -44,5 +40,15 @@ export class AppComponent {
     todo.done = false;
   }
 
+  add(){
+    // this.form.value => { title: 'Titulo'}
+    const title = this.form.controls['title'].value;
+    const id = this.todos.length + 1;
+    this.todos.push(new Todo(id, title, false));
+    this.clear();
+  }
 
+  clear(){
+    this.form.reset();
+  }
 }
